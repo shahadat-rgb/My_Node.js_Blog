@@ -1,5 +1,18 @@
-<form action="" method="POST" class="form-shadow">
-  <h4>Create new account</h4>
+
+<div class="error_msg">
+  <% if(errors.length > 0) { %>
+  <div class="errors">
+      <% errors.forEach(error => { %>
+       <span class="error"><%= error.msg %></span>
+      <% }) %>
+  </div>
+
+
+<form action="/register" method="POST" class="form-container">
+  
+  <div class="group">
+    <h4>Create new account</h4>
+  </div>
   <div class="group">
     <label for="Name">Name</label> <br />
     <input
@@ -38,3 +51,4 @@
     <input type="submit" class="register_btn" value="REGISTER" />
   </div>
 </form>
+</div>
