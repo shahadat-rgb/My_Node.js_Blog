@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
     const title = "create new account";
     const errors =[];
-    res.render("register",{title,errors})
+    res.render("register",{title,errors,inputs:{}})
 })
 
 
@@ -23,7 +23,7 @@ app.get('/login', (req, res) => {
 
 app.post("/register", [
  
-    check("name").isLength({min:5}).withMessage("Name is required & must be 5 characters long"),
+    check("name").isLength({min:5}).withMessage("Name is required & must be 5 characters long ."),
     check("email").isEmail().withMessage("Enter a valid email address"),
     check("password").isLength({min:6}).withMessage("password must be 6 characters long")
 
@@ -32,7 +32,7 @@ app.post("/register", [
   const errors = validationResult(req);
    if (!errors.isEmpty()) {
        const title = "Create new account"
-       res.render("register", {title, errors: errors.array()})
+       res.render("register", {title, errors: errors.array(),inputs:req.body})
    }else{
     res.send("form submitted")
    }

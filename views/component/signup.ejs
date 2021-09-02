@@ -1,27 +1,20 @@
-
-<div class="error_msg">
-  <% if(errors.length > 0) { %>
-  <div class="errors">
-      <% errors.forEach(error => { %>
-       <span class="error"><%= error.msg %></span>
-      <% }) %>
-  </div>
-
-
-<form action="/register" method="POST" class="form-container">
-  
+<div class="form-container">
+      <% if(errors.length > 0) { %>
+        <div class="errors">
+            <% errors.forEach(error => {  %>
+            <span class="error"><%= error.msg %> <br> </span>
+            <% }) %>
+        </div>
+        <% } %>
+    
+<form action="/register" method="POST">
   <div class="group">
-    <h4>Create new account</h4>
+    <h4 class="pt-4">Create new account</h4>
   </div>
   <div class="group">
     <label for="Name">Name</label> <br />
-    <input
-      type="text"
-      name="name"
-      id="name"
-      class="control"
-      placeholder="Enter your name"
-    />
+    <input type="text" name="name" id="name" class="control" placeholder="Name" value=<% if(inputs){ %>
+      <%= inputs.name %> <% } %>>
   </div>
 
   <div class="group">
@@ -32,7 +25,8 @@
       id="email"
       class="control"
       placeholder="Enter your email"
-    />
+      value=<% if(inputs){ %>
+        <%= inputs.email %> <% } %>>
   </div>
 
   <div class="group">
@@ -43,12 +37,13 @@
       id="password"
       class="control"
       placeholder="Enter your password"
-    />
+      value=<% if(inputs){ %>
+        <%= inputs.password%> <% } %>>
   </div>
   <br />
 
   <div class="group">
-    <input type="submit" class="register_btn" value="REGISTER" />
+    <input type="submit" class="register_btn" value="REGISTER" >
   </div>
 </form>
 </div>
