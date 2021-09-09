@@ -1,7 +1,19 @@
 <div class="form-container">
-  <form action="" method="POST">
+  <% if(locals.message.success) { %>
+    <div class="alert-success"><%= message.success %></div>
+    <% } %>
+    
+    <% if(errors.length > 0) { %>
+      <div class="errors">
+          <% errors.forEach(error => {  %>
+          <span class="error"><%= error.msg %> <br> </span>
+          <% }) %>
+      </div>
+      <% } %>
+
+  <form action="/postLogin" method="POST">
     <div class="group">
-      <h4 class="pt-4">User Login information</h4>
+      <h4 class="pt-4 text-center">User Login information</h4>
     </div>
     <div class="group">
       <label for="Email">Email</label> <br />
@@ -11,8 +23,9 @@
         id="email"
         class="control"
         placeholder="Enter your email"
-      />
-    </div>
+        value=<% if(inputs){ %>
+          <%= inputs.email %> <% } %>>
+    </div>  <br> 
 
     <div class="group">
       <label for="Password">Password</label> <br />
@@ -22,9 +35,10 @@
         id="password"
         class="control"
         placeholder="Enter your password"
-      />
+        value=<% if(inputs){ %>
+          <%= inputs.password%> <% } %>>
     </div>
-    <br />
+    <br /> <br>
 
     <div class="group">
       <input type="submit" class="register_btn" value="Login" />

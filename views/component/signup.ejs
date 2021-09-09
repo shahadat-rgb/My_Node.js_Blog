@@ -9,11 +9,11 @@
     
 <form action="/register" method="POST">
   <div class="group">
-    <h4 class="pt-4">Create new account</h4>
+    <h4 class="pt-4 text-center">Create new account</h4>
   </div>
   <div class="group">
     <label for="Name">Name</label> <br />
-    <input type="text" name="name" id="name" class="control" placeholder="Name" value=<% if(inputs){ %>
+    <input type="text" name="name" id="name"  class="control" placeholder="Name" value=<% if(inputs){ %>
       <%= inputs.name %> <% } %>>
   </div>
 

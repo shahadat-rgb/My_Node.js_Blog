@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%=title%>
+  </title>
+
+  <link rel="stylesheet" href="/./assests/css/app.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+</head>
+
+<body class="bg_design">
+  <%- include("./component/nav.ejs") %>
+
+    <div class="container mb-5">
+      <div class="banner_design text-center">
+        <h3 class="text-success"><b>BEST NEWS WEBSITE OF BANGLADESH</b></h3>
+        <p class="text-white"><b>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo, expedita.</b></p>
+      </div>
+
+      <div class="msg">
+        <% if(locals.message.success) { %>
+          <div class="alert-success">
+            <%= message.success %>
+          </div>
+          <% } %>
+      </div>
+
+
+      <% if(posts.length> 0) { %>
+        <% posts.forEach(post=> { %>
+
+          <div class="border_hor">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="first_user_ch">
+                  <span>
+                    <%= post.userName.charAt(0).toUpperCase() %>
+                  </span>
+                </div>
+                <h5>
+                  <%= post.userName %>
+                </h5>
+                <p>
+                  <%= formate(post.updatedAt, "d,mmmm,yyyy" ) %>
+                </p>
+
+                <h4 class="mt-3"><b>
+                    <a class="title_link" href="">
+                      <%= post.title.slice(0,30) %>.....
+                    </a>
+                  </b></h4>
+                <p>
+                  <%= post.body.slice(0,280) %>....
+                </p>
+              </div>
+
+              <div class="col-md-4">
+                <img class="body_img" src="/assests/img/<%= post.image %>" alt="">
+              </div>
+            </div>
+          </div>
+          <% }) %>
+            <% } else { %>
+              <p>No post in the database</p>
+              <% } %>
+
+                <% let totalPages=Math.ceil(count/perPage); let startLoop=currentPage ; let diff=totalPages -
+                  currentPage; if(diff <=4){ startLoop=totalPages - 4 ; } let endLoop=parseInt(startLoop) + 4; if
+                  (startLoop <=0) { startLoop=1; } %>
+
+                  <% if (count> 4) {%>
+                    <div class="pagination text-center">
+                      <ul>
+                        <% if(currentPage> 1 ) {%>
+                          <li><a href='/post/<%= currentPage - 1 %> '>Prev</a></li>
+                          <% } %>
+                            <% for(let i=startLoop; i <=endLoop; i++ ) { let active=i==currentPage ? 'active' : '' %>
+                              <li><a href="/post/<%= i %>" class="<%= active %>">
+                                  <%= i %>
+                                </a></li>
+                              <% } %>
+
+                                <% if(currentPage < totalPages) {%>
+                                  <li><a href='/post/<%= parseInt(currentPage) + 1 %>'>Next</a></li>
+                                  <% } %>
+                      </ul>
+                    </div>
+                    <% } %>
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>

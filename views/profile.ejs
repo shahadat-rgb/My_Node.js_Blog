@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%=title%></title>
-    <link rel="stylesheet" href="assests/css/app.css" />
+    <link rel="stylesheet" href="./assests/css/app.css" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -13,21 +13,23 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body> 
     <%- include("./component/nav.ejs") %>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7 mt-5">
-          <img
-            style="width: 100%; height: 450px"
-            src="./assests/img/banner.jpg"
-            alt=""
-          />
-        </div>
-        <div class="col-md-5"><%- include("./component/loginForm.ejs")%></div>
+      
+
+    <div class="container profile_desigon">
+      <div class="first_Char">
+       <span><%= user.name.charAt(0).toUpperCase() %></span>
+      </div>
+      <div class="name_email">
+        <p><%= user.name %> </p>
+        <p><%= user.email %> </p>
       </div>
     </div>
 
+
+
+        
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

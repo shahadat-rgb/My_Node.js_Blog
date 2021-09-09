@@ -1,29 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
- <div class="container">
-    <a class="navbar-brand" href="/"><h2><span class="text-success">My</span> Blog</h2></a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+  <div class="container">
+
+    <a class="navbar-brand" href="">
+      <h2> <a href="/profile" style="text-decoration: none;"><span class="text-success">My Blog</span></a></h2>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="justify-content-end collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
+        <% if(login) { %>
+          <li class="nav-item"> <a class="nav-link" class="nav-link" href="/createPost">add post</a> </li>
+          <li class="nav-item"> <a class="nav-link" class="nav-link" href="/post/1">posts</a> </li>
+          <!-- <button> </button> -->
+          <a class="link" href="/logout"><button class="logout_btn">logout</button></a>
+          <% } else { %>
+            <li class="nav-item"> <a class="nav-link" href="/">Register</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/login">Login</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="/profile">Profile</a> </li>
+            <% } %>
       </ul>
     </div>
-  </nav>
+</nav>
 </div>
