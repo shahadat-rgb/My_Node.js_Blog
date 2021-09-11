@@ -1,3 +1,6 @@
+const {check,validationResult} = require("express-validator")
+
+
 const formidable = require('formidable');
 const { v4: uuidv4 } = require('uuid');
 const fs = require("fs");
@@ -99,8 +102,80 @@ const post = async(req,res)=>{
 
     res.render("post",{title:"post", login:true, posts :allPost, formate:dateFormat,count,perPage,currentPage})
 }
+
+const details = async(req,res)=>{
+    const id = req.params.id;
+    try {
+        const details = await Post.findOne({_id:id})
+        res.render('details',{title:'Post Details',login:true,details})
+    } catch (err) {
+        res.send(err)
+    }
+   
+}
+
+const updateForm =async(req,res)=>{
+    const id = req.params.id;
+     try {
+        const post = await Post.findOne({_id:id})
+        res.render('update',{title:'update post',login:true,errors:[],post})
+     } catch (error) {
+          res.send(error)
+     }
+}
+  
+
+const postValidations = [
+    check('title').not().isEmpty().withMessage('title is required'),
+    check('body').not().isEmpty().withMessage('body is required')
+]
+
+
+const postUpdate = async (req,res)=>{
+  
+    const errors = validationResult(req);
+    if (!errors.isEmpty()){
+        const id = req.body.hiddenID;
+        const post = await Post.findOne({_id:id})
+        res.render('update',{title:'update post',login:true,errors:errors.array(),post})
+    }else{
+        const {hiddenID,title,body}= req.body;
+        try {
+            const updateResult = await Post.findByIdAndUpdate(hiddenID,{title,body})
+            if (updateResult) {
+                    req.flash("success",'your post has been updated successfully')   
+                    res.redirect('/post/1')
+
+            }
+        } catch (err) {
+            res.send(err)
+        }
+    }
+ 
+
+
+}
+
+const deletePost = async (req, res) => {
+    const id = req.body.deleteID;
+    try {
+        const response = await Post.findByIdAndRemove(id)
+        if (response) {
+            req.flash('success', "Your post has been deleted successfully")
+            res.redirect('/post/1')
+        }
+    } catch (err) {
+        res.send(err)
+    }
+}
+
   module.exports={
       postCreate,
       stroePost,
       post,
+      details,
+      updateForm,
+      postUpdate,
+      postValidations,
+      deletePost,
   }

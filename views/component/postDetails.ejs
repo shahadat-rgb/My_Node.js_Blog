@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 bg-light">
+            <div class="details_link mb-3 mt-4 text-center">
+                <a href="/update/<%= details._id  %> "><button class="btn btn-success">update</button></a>
+
+                <form action="/delete" method="POST" style="display: inline-block">
+                    <input type="hidden" name="deleteID" value="<%= details._id %>">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                </form>
+
+            </div>
+            <div class="details_body">
+                <h3 class="mb-5 text-justify">
+                    <%= details.title %>
+                </h3>
+                <img class='w-100' src="/assests/img/<%= details.image %> " alt="">
+                <p class="text-justify mt-5">
+                    <%= details.body %>
+                </p>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+</div>
